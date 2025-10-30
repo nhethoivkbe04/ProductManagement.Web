@@ -1,37 +1,52 @@
 @model ProductManagement.Web.DTOs.ProductDeleteDto
 
-
 @{
-    ViewData["Title"] = "Xóa sản phẩm";
+    ViewData["Title"] = "Xác nhận xóa sản phẩm";
 }
 
-<div class="container py-4">
-    <h2 class="text-danger fw-bold mb-4">
-        <i class="fas fa-trash-alt me-2"></i>Xóa sản phẩm
-    </h2>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-danger text-white text-center rounded-top-4">
+            <h3 class="mb-0"><i class="bi bi-trash"></i> Xác nhận xóa sản phẩm</h3>
+        </div>
 
-    <div class="card shadow-sm border-0 p-4 rounded-3">
-        <p class="fs-5">Bạn có chắc chắn muốn xóa sản phẩm <strong class="text-danger">@Model.Name</strong> không?</p>
+        <div class="card-body">
+            <p class="text-center text-muted fs-5">
+                Bạn có chắc chắn muốn xóa sản phẩm này? Thao tác này <strong>không thể hoàn tác</strong>.
+            </p>
 
-        <dl class="row">
-            <dt class="col-sm-3 fw-bold">Giá</dt>
-            <dd class="col-sm-9">@Model.Price.ToString("N0")</dd>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <table class="table table-bordered mt-3">
+                        <tr>
+                            <th class="w-25 bg-light">Tên sản phẩm</th>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Giá</th>
+                            <td>@Model.Price.ToString("N0") ₫</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Tồn kho</th>
+                            <td>@Model.Stock</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Mô tả</th>
+                            <td>@Model.Description</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-            <dt class="col-sm-3 fw-bold">Số lượng</dt>
-            <dd class="col-sm-9">@Model.Stock</dd>
-
-            <dt class="col-sm-3 fw-bold">Mô tả</dt>
-            <dd class="col-sm-9">@Model.Description</dd>
-        </dl>
-
-        <form asp-action="DeleteConfirmed" class="mt-4 text-end">
-            <input type="hidden" asp-for="Id" />
-            <a asp-action="Index" class="btn btn-secondary me-2">
-                <i class="fas fa-arrow-left"></i> Hủy
-            </a>
-            <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash-alt me-1"></i> Xóa
-            </button>
-        </form>
+            <form asp-action="Delete" method="post" class="text-center mt-4">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger btn-lg me-3">
+                    <i class="bi bi-trash-fill"></i> Xóa
+                </button>
+                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                    <i class="bi bi-arrow-left-circle"></i> Quay lại
+                </a>
+            </form>
+        </div>
     </div>
 </div>
